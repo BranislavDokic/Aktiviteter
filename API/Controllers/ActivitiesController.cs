@@ -2,6 +2,9 @@ using System;
 using Application.Activities.Commands;
 using Application.Activities.DTOs;
 using Application.Activities.queries;
+using Application.Activities.Queries;
+using Application.Core;
+using CloudinaryDotNet.Actions;
 using Domain;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -14,9 +17,10 @@ public class ActivitiesController : BaseApiController
 {
     
     [HttpGet]
-    public async Task<ActionResult<List<ActivityDto>>>GetActivites()
+    public async Task<ActionResult<PagedList<ActivityDto, DateTime?>>>GetActivites(
+        [FromQuery]ActivityParams activityParams)
     {
-        return await Mediator.Send(new GetActivityList.Query());
+        return HandleResult(await Mediator.Send(new GetActivityList.Query{Params= activityParams}));
     }
 
     
