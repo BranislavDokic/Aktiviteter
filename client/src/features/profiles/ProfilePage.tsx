@@ -15,7 +15,7 @@ import { Grid2, Typography } from "@mui/material";
    return (
      <Grid2 container>
          <Grid2 size={12}>
-             <ProfileHeader profile={profile} />
+             <ProfileHeader />
              <ProfileContent />
          </Grid2>
      </Grid2>
