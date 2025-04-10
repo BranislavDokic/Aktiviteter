@@ -1,5 +1,7 @@
 import {MapContainer, Popup, TileLayer, Marker} from 'react-leaflet';
- import 'leaflet/dist/leaflet.css';
+import 'leaflet/dist/leaflet.css';
+import {Icon} from 'leaflet';
+import markerIconPage from 'leaflet/dist/images/marker-icon.png';
  
  type Props = {
      position: [number, number];
@@ -12,7 +14,7 @@ import {MapContainer, Popup, TileLayer, Marker} from 'react-leaflet';
              <TileLayer
                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
              />
-             <Marker position={position}>
+             <Marker position={position} icon={new Icon({iconUrl: markerIconPage})}>
                  <Popup>
                      {venue}
                  </Popup>
