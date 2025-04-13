@@ -50,13 +50,27 @@ export default function LocationInput<T extends FieldValues>(props: Props<T>) {
     }
 
     const handleSelect = (location: LocationIQSuggestion) => {
-        const city = location.address?.city || location.address?.town || location.address?.village;
-        const venue = location.display_name;
-        const latitude = location.lat;
-        const longitude = location.lon;
+        console.log("Selected location:", location);
+    
+        const city = location.address?.city 
+                  || location.address?.town 
+                  || location.address?.village 
+                  || location.address?.state 
+                  || location.address?.country 
+                  || "Unknown";
+    
+        const venue = location.display_name || "Unnamed Place";
+        const latitude = location.lat ? parseFloat(location.lat) : 0.0;
+        const longitude = location.lon ? parseFloat(location.lon) : 0.0;
 
+        field.onChange({
+            city,
+            venue,
+            latitude,
+            longitude
+        });
+    
         setInputValue(venue);
-        field.onChange({city, venue, latitude, longitude});
         setSuggestions([]);
     }
 
